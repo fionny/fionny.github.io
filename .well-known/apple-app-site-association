@@ -1,1 +1,12 @@
-
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["TEAMID.com.fionnmcginley.countdown"],
+        "components": [
+          { "/": "/import*" }
+        ]
+      }
+    ]
+  }
+}
