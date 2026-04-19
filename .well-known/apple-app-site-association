@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["8L3JPW436P.com.fionnmcginley.countdown"],
+        "appIDs": ["8L3JPW436P.com.fionnmcginley.countdown", "8L3JPW436P.com.fionnmcginley.countdown.macos"],
         "components": [
           {
             "/": "/import*"
