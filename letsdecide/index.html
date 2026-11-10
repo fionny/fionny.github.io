@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Let's Decide</title>
+<meta name="description" content="Let's Decide: a playful, fair way for families to decide. Spin a wheel, pop balloons, race ducks and more. For iPhone, iPad and Mac.">
+<meta property="og:title" content="Let's Decide">
+<meta property="og:description" content="Can't decide? Let's Decide! Spin, pop, race and shake your way to an answer. Fair every time.">
+<meta property="og:image" content="https://fionny.github.io/letsdecide/images/icon.png">
+<link rel="icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+  :root {
+    --ink: #1B2538;
+    --ink-soft: #4A5568;
+    --decide: #FD6650;
+    --coral: #FF8A75; --tangerine: #FFB36B; --sunflower: #FFD95E; --mint: #8EF0CA;
+    --sky: #86CAFB; --lavender: #E9B1FB; --rose: #FFA8C5;
+    --bg: #F4F6FB;
+    --card: rgba(255, 255, 255, 0.72);
+    --line: rgba(27, 37, 56, 0.08);
+    --wash-1: #D9F7EC; --wash-2: #DCEBFD; --wash-3: #FBE3EE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #F2F4FA; --ink-soft: #B8C0D0; --bg: #141B2B;
+      --card: rgba(255, 255, 255, 0.07); --line: rgba(255, 255, 255, 0.1);
+      --wash-1: #16303A; --wash-2: #1A2540; --wash-3: #2E1F33;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(60rem 40rem at 0% 0%, var(--wash-1), transparent 60%),
+      radial-gradient(60rem 40rem at 100% 10%, var(--wash-2), transparent 60%),
+      radial-gradient(60rem 50rem at 50% 100%, var(--wash-3), transparent 60%),
+      var(--bg);
+    background-attachment: fixed;
+    line-height: 1.55;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+  header.hero { text-align: center; padding: 64px 0 40px; }
+  .icon { width: 128px; height: 128px; border-radius: 29px; box-shadow: 0 14px 40px rgba(253, 102, 80, 0.28); }
+  h1 { font-size: clamp(2.6rem, 7vw, 4.2rem); line-height: 1.05; margin: 22px 0 10px; letter-spacing: -0.02em; font-weight: 800; }
+  .tagline { font-size: clamp(1.15rem, 2.6vw, 1.4rem); color: var(--ink-soft); margin: 0 auto 26px; max-width: 34rem; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--decide); color: #1B2538; font-weight: 800;
+    padding: 14px 26px; border-radius: 999px; font-size: 1.05rem;
+    box-shadow: 0 10px 26px rgba(253, 102, 80, 0.35);
+  }
+  .platforms { margin-top: 14px; color: var(--ink-soft); font-size: 0.95rem; }
+
+  .shots {
+    display: grid; grid-auto-flow: column; grid-auto-columns: minmax(190px, 230px);
+    gap: 18px; overflow-x: auto; padding: 18px 4px 28px; scroll-snap-type: x mandatory;
+    justify-content: safe center;
+  }
+  .shot { scroll-snap-align: center; margin: 0; text-align: center; }
+  .shot img {
+    width: 100%; border-radius: 30px; display: block;
+    border: 6px solid var(--card); box-shadow: 0 16px 36px rgba(27, 37, 56, 0.16);
+    background: var(--card);
+  }
+  .shot figcaption { font-weight: 700; margin-top: 10px; font-size: 0.95rem; }
+
+  section { padding: 40px 0; }
+  h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin: 0 0 8px; text-align: center; font-weight: 800; letter-spacing: -0.01em; }
+  .lede { text-align: center; color: var(--ink-soft); max-width: 40rem; margin: 0 auto 28px; font-size: 1.08rem; }
+
+  .modes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+  .mode {
+    border-radius: 24px; padding: 20px; color: #1B2538;
+    box-shadow: 0 8px 22px rgba(27, 37, 56, 0.08); position: relative;
+  }
+  .mode h3 { margin: 6px 0 4px; font-size: 1.15rem; }
+  .mode p { margin: 0; font-size: 0.97rem; opacity: 0.85; }
+  .mode .emoji { font-size: 1.9rem; }
+  .tag {
+    position: absolute; top: 16px; right: 16px; font-size: 0.75rem; font-weight: 800;
+    background: rgba(255, 255, 255, 0.7); padding: 3px 10px; border-radius: 999px;
+  }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .feature {
+    background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 22px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .feature h3 { margin: 0 0 6px; font-size: 1.1rem; }
+  .feature p { margin: 0; color: var(--ink-soft); }
+  .feature .emoji { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+
+  footer { text-align: center; padding: 48px 0 56px; color: var(--ink-soft); font-size: 0.95rem; }
+  footer nav { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+  footer a { font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <img class="icon" src="images/icon.png" alt="The Let's Decide app icon">
+      <h1>Let's Decide</h1>
+      <p class="tagline">Can't decide? Spin, pop, race and shake your way to an answer. Fun for kids, fair for everyone.</p>
+      <span class="badge">Coming soon to the App Store</span>
+      <p class="platforms">For iPhone, iPad and Mac</p>
+    </header>
+
+    <div class="shots" aria-label="Screenshots">
+      <figure class="shot"><img src="images/home.jpg" alt="Home screen with lists like Dinner tonight and Movie night" loading="lazy"><figcaption>Your lists</figcaption></figure>
+      <figure class="shot"><img src="images/wheel.jpg" alt="Spin the Wheel with dinner options" loading="lazy"><figcaption>Spin the Wheel</figcaption></figure>
+      <figure class="shot"><img src="images/ducks.jpg" alt="Rubber ducks racing down a river" loading="lazy"><figcaption>Duck Race</figcaption></figure>
+      <figure class="shot"><img src="images/marble.jpg" alt="A marble rolling through loops and tubes" loading="lazy"><figcaption>Marble Run</figcaption></figure>
+      <figure class="shot"><img src="images/eeny.jpg" alt="A little character hopping along to Eeny Meeny" loading="lazy"><figcaption>Eeny Meeny</figcaption></figure>
+      <figure class="shot"><img src="images/balldrop.jpg" alt="A ball bouncing down pins into cups" loading="lazy"><figcaption>Ball Drop</figcaption></figure>
+    </div>
+
+    <section id="modes">
+      <h2>Eight ways to decide</h2>
+      <p class="lede">Make a list (dinner, films, who goes first) and pick a fun way to choose. Two ways are free forever. One optional purchase of €5.99 unlocks the other six for life, for the whole family. No subscriptions.</p>
+      <div class="modes">
+        <div class="mode" style="background: var(--coral)"><span class="tag">Free</span><span class="emoji">🎡</span><h3>Spin the Wheel</h3><p>Flick it and watch it tick to a stop.</p></div>
+        <div class="mode" style="background: var(--sky)"><span class="tag">Free</span><span class="emoji">🎈</span><h3>Pop the Balloons</h3><p>Pop one and the answer flutters down.</p></div>
+        <div class="mode" style="background: var(--sunflower)"><span class="emoji">🦆</span><h3>Duck Race</h3><p>Lead changes, commentary and photo finishes.</p></div>
+        <div class="mode" style="background: var(--lavender)"><span class="emoji">🎁</span><h3>Mystery Boxes</h3><p>Follow the shuffle, then pick a box.</p></div>
+        <div class="mode" style="background: var(--mint)"><span class="emoji">🫙</span><h3>Shake the Jar</h3><p>Give your phone a shake and a slip pops out.</p></div>
+        <div class="mode" style="background: var(--rose)"><span class="emoji">🎶</span><h3>Eeny Meeny</h3><p>Count along to the rhyme, out loud.</p></div>
+        <div class="mode" style="background: var(--tangerine)"><span class="emoji">🔴</span><h3>Ball Drop</h3><p>Bounce down the pins into a cup.</p></div>
+        <div class="mode" style="background: var(--sky)"><span class="emoji">🌀</span><h3>Marble Run</h3><p>Loops, twists and flippers to one exit.</p></div>
+      </div>
+    </section>
+
+    <section id="families">
+      <h2>Made for families</h2>
+      <p class="lede">Settle "who goes first" without the argument, and make dinner decisions a game.</p>
+      <div class="features">
+        <div class="feature"><span class="emoji">⚖️</span><h3>Fair every time</h3><p>The answer is chosen at random before the animation starts, so every option has exactly the same chance.</p></div>
+        <div class="feature"><span class="emoji">🔁</span><h3>Take turns</h3><p>Remove an answer and go again, or use a "whose turn" list so everyone gets a go.</p></div>
+        <div class="feature"><span class="emoji">📸</span><h3>Your own lists</h3><p>Add emoji or photos, paste a list from anywhere, or just type a few options and decide.</p></div>
+        <div class="feature"><span class="emoji">🔒</span><h3>Grown-up gate</h3><p>Settings and purchases ask a quick grown-up question first, so little fingers stay in the fun parts.</p></div>
+        <div class="feature"><span class="emoji">🙈</span><h3>No ads, no tracking</h3><p>No accounts, no analytics and no internet connection. Your lists stay on your device.</p></div>
+        <div class="feature"><span class="emoji">📱</span><h3>iPhone, iPad and Mac</h3><p>Buy once and the extra ways to decide unlock on every device, with Family Sharing.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      <nav>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:FionnMcGinleyApps@icloud.com">Support</a>
+      </nav>
+      <p>© 2026 Fionn McGinley</p>
+    </footer>
+  </div>
+</body>
+</html>
