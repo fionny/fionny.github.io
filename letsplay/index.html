@@ -3,45 +3,145 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Let's Play — calm, ad-free games for toddlers</title>
-<meta name="description" content="Let's Play: eleven gentle, ad-free games for toddlers on iPhone, iPad, Mac and Apple TV. No data collected.">
+<title>Let's Play: gentle games for toddlers</title>
+<meta name="description" content="Let's Play: twelve gentle, ad-free games for toddlers on iPhone, iPad, Mac and Apple TV. No ads, no tracking, no data collected.">
+<meta property="og:title" content="Let's Play: gentle games for little hands">
+<meta property="og:description" content="Twelve calm, cheerful games for 1 to 5 year olds. No ads, no tracking, nothing to read.">
+<meta property="og:image" content="https://fionny.github.io/letsplay/images/social.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="images/apple-touch-icon.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <style>
-  :root { --ink: #2B2D42; --ink-soft: #55586E; --bg: #FFF8EC; --card: #FFFFFF; --line: rgba(43, 45, 66, 0.08); --accent: #FF6B6B; }
+  :root {
+    --ink: #2B2D42; --ink-soft: #55586E; --bg: #FFF8EC; --accent: #FF6B6B;
+    --coral: #FF8787; --tangerine: #FFB168; --sunflower: #FFE066; --mint: #63E6BE;
+    --sky: #74C0FC; --lavender: #B197FC; --rose: #FAA2C1;
+    --card: rgba(255, 255, 255, 0.78); --line: rgba(43, 45, 66, 0.08);
+    --wash-1: #FFEFC2; --wash-2: #D9F5EC; --wash-3: #FFE3EC;
+  }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --ink: #F8F9FA; --ink-soft: #C3C7D6; --bg: #1B2140; --card: #242B4D; --line: rgba(255, 255, 255, 0.1); --accent: #FF8787; }
+    :root:not([data-theme="light"]) {
+      --ink: #F8F9FA; --ink-soft: #C3C7D6; --bg: #1B2140;
+      --card: rgba(255, 255, 255, 0.07); --line: rgba(255, 255, 255, 0.1);
+      --wash-1: #2A2A4E; --wash-2: #1D3145; --wash-3: #33244A;
+    }
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0; background: var(--bg); color: var(--ink); line-height: 1.6;
+    margin: 0; color: var(--ink); line-height: 1.55;
     font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background:
+      radial-gradient(60rem 40rem at 0% 0%, var(--wash-1), transparent 60%),
+      radial-gradient(60rem 40rem at 100% 10%, var(--wash-2), transparent 60%),
+      radial-gradient(60rem 50rem at 50% 100%, var(--wash-3), transparent 60%),
+      var(--bg);
+    background-attachment: fixed;
   }
-  main { max-width: 720px; margin: 0 auto; padding: 56px 16px 64px; text-align: center; }
-  .icon { width: 120px; height: 120px; border-radius: 27px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); }
-  h1 { font-size: 2.4rem; margin: 20px 0 6px; }
-  .tagline { font-size: 1.2rem; color: var(--ink-soft); margin: 0 0 28px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px 24px; margin: 0 auto 16px; text-align: left; }
-  .card p { color: var(--ink-soft); margin: 0 0 10px; }
-  .card p:last-child { margin: 0; }
-  .soon { display: inline-block; background: var(--accent); color: #2B2D42; font-weight: 800; padding: 8px 18px; border-radius: 999px; margin-bottom: 28px; }
-  footer { margin-top: 28px; color: var(--ink-soft); }
-  a { color: inherit; font-weight: 700; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  header.hero { text-align: center; padding: 64px 0 36px; }
+  .icon { width: 128px; height: 128px; border-radius: 29px; box-shadow: 0 14px 40px rgba(255, 159, 67, 0.35); }
+  h1 { font-size: clamp(2.8rem, 8vw, 4.6rem); line-height: 1.05; margin: 22px 0 10px; font-weight: 900; }
+  h1 span { display: inline-block; text-shadow: 0 3px 0 rgba(43, 45, 66, 0.12); }
+  h1 span:nth-child(odd) { transform: rotate(-4deg); }
+  h1 span:nth-child(even) { transform: rotate(4deg); }
+  .tagline { font-size: clamp(1.15rem, 2.6vw, 1.4rem); color: var(--ink-soft); margin: 0 auto 26px; max-width: 34rem; }
+  .badge {
+    display: inline-flex; background: var(--accent); color: #2B2D42; font-weight: 800;
+    padding: 14px 26px; border-radius: 999px; font-size: 1.05rem; box-shadow: 0 10px 26px rgba(255, 107, 107, 0.35);
+  }
+  .platforms { margin-top: 14px; color: var(--ink-soft); font-size: 0.95rem; }
+  .shots {
+    display: grid; grid-auto-flow: column; grid-auto-columns: minmax(190px, 230px);
+    gap: 18px; overflow-x: auto; padding: 18px 4px 28px; scroll-snap-type: x mandatory; justify-content: safe center;
+  }
+  .shot { scroll-snap-align: center; margin: 0; text-align: center; }
+  .shot img {
+    width: 100%; border-radius: 30px; display: block; border: 6px solid var(--card);
+    box-shadow: 0 16px 36px rgba(43, 45, 66, 0.16); background: var(--card);
+  }
+  .shot figcaption { font-weight: 700; margin-top: 10px; font-size: 0.95rem; }
+  section { padding: 40px 0; }
+  h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin: 0 0 8px; text-align: center; font-weight: 800; }
+  .lede { text-align: center; color: var(--ink-soft); max-width: 40rem; margin: 0 auto 28px; font-size: 1.08rem; }
+  .modes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+  .mode { border-radius: 24px; padding: 20px; color: #2B2D42; box-shadow: 0 8px 22px rgba(43, 45, 66, 0.08); position: relative; }
+  .mode h3 { margin: 6px 0 4px; font-size: 1.15rem; }
+  .mode p { margin: 0; font-size: 0.97rem; opacity: 0.85; }
+  .mode .emoji { font-size: 1.9rem; }
+  .tag { position: absolute; top: 16px; right: 16px; font-size: 0.75rem; font-weight: 800; background: rgba(255, 255, 255, 0.7); padding: 3px 10px; border-radius: 999px; }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .feature { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 22px; }
+  .feature h3 { margin: 0 0 6px; font-size: 1.1rem; }
+  .feature p { margin: 0; color: var(--ink-soft); }
+  .feature .emoji { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+  footer { text-align: center; padding: 48px 0 56px; color: var(--ink-soft); font-size: 0.95rem; }
+  footer nav { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+  footer a { font-weight: 700; }
 </style>
 </head>
 <body>
-<main>
-  <img class="icon" src="images/apple-touch-icon.png" alt="Let's Play app icon">
-  <h1>Let's Play</h1>
-  <p class="tagline">Calm, ad-free games for toddlers.</p>
-  <span class="soon">Coming soon to the App Store</span>
+  <div class="wrap">
+    <header class="hero">
+      <img class="icon" src="images/icon.png" alt="The Let's Play app icon">
+      <h1 aria-label="Let's Play"><span style="color:#FF6B6B">L</span><span style="color:#FF9F43">e</span><span style="color:#F5B800">t</span><span style="color:#38D9A9">'</span><span style="color:#4DABF7">s</span> <span style="color:#9775FA">P</span><span style="color:#F783AC">l</span><span style="color:#FF6B6B">a</span><span style="color:#FF9F43">y</span></h1>
+      <p class="tagline">Gentle games for little hands. Twelve calm, cheerful games for 1 to 5 year olds, with nothing to read and no way to fail.</p>
+      <span class="badge">Coming soon to the App Store</span>
+      <p class="platforms">For iPhone, iPad, Mac and Apple TV</p>
+    </header>
 
-  <div class="card">
-    <p>Eleven gentle games made for little hands: animal sounds, pop-up pals, balloons, a duck race, peekaboo, sparkles, a xylophone and drums, counting, colours, memory pairs and a bedtime sky. One tap is all a child needs, there's no "game over", and every round ends with a cheer and a sticker.</p>
-    <p>For iPhone, iPad, Mac and Apple TV. No ads, no accounts, no internet connection and no data collected.</p>
+    <div class="shots" aria-label="Screenshots">
+      <figure class="shot"><img src="images/home.jpg" alt="The home screen with twelve colourful game tiles" loading="lazy"><figcaption>Twelve games</figcaption></figure>
+      <figure class="shot"><img src="images/animals.jpg" alt="Farm animals to tap in Animal Sounds" loading="lazy"><figcaption>Animal Sounds</figcaption></figure>
+      <figure class="shot"><img src="images/race.jpg" alt="Rubber ducks racing in Tap Race" loading="lazy"><figcaption>Tap Race</figcaption></figure>
+      <figure class="shot"><img src="images/paint.jpg" alt="A colourful finger painting" loading="lazy"><figcaption>Finger Paint</figcaption></figure>
+      <figure class="shot"><img src="images/balloons.jpg" alt="Balloons floating up a blue sky" loading="lazy"><figcaption>Balloon Pop</figcaption></figure>
+      <figure class="shot"><img src="images/peekaboo.jpg" alt="Animals peeking out from their hiding places" loading="lazy"><figcaption>Peekaboo</figcaption></figure>
+      <figure class="shot"><img src="images/count.jpg" alt="Apples being counted into a basket" loading="lazy"><figcaption>Count With Me</figcaption></figure>
+      <figure class="shot"><img src="images/bedtime.jpg" alt="A bunny constellation in the night sky" loading="lazy"><figcaption>Bedtime Stars</figcaption></figure>
+      <figure class="shot"><img src="images/stickers.jpg" alt="The sticker book with collected stickers" loading="lazy"><figcaption>Sticker book</figcaption></figure>
+    </div>
+
+    <section id="games">
+      <h2>Twelve games to play</h2>
+      <p class="lede">Three games are free forever, and every other game has a free play. One optional purchase unlocks them all for the whole family, including games added later. No subscriptions.</p>
+      <div class="modes">
+        <div class="mode" style="background: var(--coral)"><span class="tag">Free</span><span class="emoji">🐮</span><h3>Animal Sounds</h3><p>Tap 30 animals to hear them say hello.</p></div>
+        <div class="mode" style="background: var(--mint)"><span class="tag">Free</span><span class="emoji">🌱</span><h3>Pop-Up Pals</h3><p>Catch the friends peeking out of their flowerpots.</p></div>
+        <div class="mode" style="background: var(--rose)"><span class="tag">Free</span><span class="emoji">🎈</span><h3>Balloon Pop</h3><p>Pop, pop, hooray! Watch for the golden star balloon.</p></div>
+        <div class="mode" style="background: var(--sky)"><span class="emoji">🦆</span><h3>Tap Race</h3><p>Tap to race the rubber ducks, or race a friend on iPad.</p></div>
+        <div class="mode" style="background: var(--tangerine)"><span class="emoji">🙈</span><h3>Peekaboo</h3><p>Who's hiding in the garden, on the farm or at the beach?</p></div>
+        <div class="mode" style="background: var(--lavender)"><span class="emoji">✨</span><h3>Sparkle Screen</h3><p>Every tap makes stars, bubbles, fireworks and music.</p></div>
+        <div class="mode" style="background: var(--rose)"><span class="emoji">🎵</span><h3>Xylophone & Drums</h3><p>A rainbow xylophone with play-along songs, and four drums.</p></div>
+        <div class="mode" style="background: var(--sunflower)"><span class="emoji">🍎</span><h3>Count With Me</h3><p>Count apples, fish and stars into the basket.</p></div>
+        <div class="mode" style="background: var(--mint)"><span class="emoji">🐶</span><h3>Feed the Animal</h3><p>Learn colours by feeding hungry friends.</p></div>
+        <div class="mode" style="background: var(--sky)"><span class="emoji">🃏</span><h3>Memory Pairs</h3><p>Flip the cards and find the matching animals.</p></div>
+        <div class="mode" style="background: var(--lavender)"><span class="emoji">🌙</span><h3>Bedtime Stars</h3><p>Light up a sleepy constellation and say goodnight.</p></div>
+        <div class="mode" style="background: var(--coral)"><span class="emoji">🎨</span><h3>Finger Paint</h3><p>A big sheet of paper, pots of paint and a rainbow brush.</p></div>
+      </div>
+    </section>
+
+    <section id="families">
+      <h2>Made for families</h2>
+      <p class="lede">Big targets, friendly voices and a cheering robin. Every round ends with a celebration and a sticker for the sticker book.</p>
+      <div class="features">
+        <div class="feature"><span class="emoji">🙈</span><h3>No ads, no tracking</h3><p>No accounts, no analytics and no internet connection. Nothing ever leaves the device.</p></div>
+        <div class="feature"><span class="emoji">🔒</span><h3>Grown-up gate</h3><p>Settings and purchases sit behind a question only a grown-up can answer, so little fingers stay in the games.</p></div>
+        <div class="feature"><span class="emoji">⏰</span><h3>Gentle playtime limits</h3><p>Set a limit and the robin yawns when it's time for a break. No sudden stops.</p></div>
+        <div class="feature"><span class="emoji">👆</span><h3>One tap to play</h3><p>No reading, no menus, no "game over". A wrong tap gets a wiggle and another try.</p></div>
+        <div class="feature"><span class="emoji">⭐</span><h3>40 stickers to collect</h3><p>Every finished round adds a sticker to the book, and each one makes its own sound.</p></div>
+        <div class="feature"><span class="emoji">📱</span><h3>Every screen in the house</h3><p>iPhone, iPad, Mac and Apple TV. Buy once and share with Family Sharing.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      <nav>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:FionnMcGinleyApps@icloud.com">Support</a>
+      </nav>
+      <p>© 2026 Fionn McGinley</p>
+    </footer>
   </div>
-
-  <footer><a href="privacy.html">Privacy Policy</a> · <a href="mailto:FionnMcGinleyApps@icloud.com">Contact</a></footer>
-</main>
 </body>
 </html>
